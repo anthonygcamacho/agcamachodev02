@@ -1,5 +1,7 @@
 import tw from "twin.macro"
 import Icon from "./Icon"
+import Project from "./Project"
+// import { useState } from "react"
 
 const AppSection = tw.div`flex`
 
@@ -19,9 +21,11 @@ const TechStack = tw.div`flex flex-wrap justify-center`
 
 const Tech = tw.span``
 
-const Projects = tw.div``
+const Projects = tw.div`p-20`
 
-const ProjectsHeader = tw.h2``
+const ProjectsHeader = tw.h2`text-3xl mb-8`
+
+const ProjectGroups = tw.div`flex flex-wrap justify-start items-start gap-8`
 
 const Featured = tw.div``
 
@@ -31,17 +35,57 @@ function App() {
     const projects = [
         {
             type: "featured",
-            thumbImg: "",
+            thumbImg: "movies-api.png",
             title: "Movies API - Demo",
-            description: "This is a demo app.",
-            appLink: "https//movieapi.net",
+            description:
+                "This is a REST API built as a demo for potential employers.",
+            siteAddress: "https://moviesapi.net",
+            github: "https://github.com/anthonygcamacho/movies-api",
             tech: [
                 "NodeJS",
                 "Express",
                 "TypeScript",
                 "AWS",
-                "AWS - RDS",
-                "AWS - Fargate",
+                "AWS|RDS|Postgres",
+                "AWS|Fargate",
+                "Docker",
+                "StencilJS",
+            ],
+        },
+        {
+            type: "featured",
+            thumbImg: "movies-api.png",
+            title: "Movies API - Demo",
+            description:
+                "This is a REST API built as a demo for potential employers.",
+            siteAddress: "https://moviesapi.net",
+            github: "https://github.com/anthonygcamacho/movies-api",
+            tech: [
+                "NodeJS",
+                "Express",
+                "TypeScript",
+                "AWS",
+                "AWS|RDS|Postgres",
+                "AWS|Fargate",
+                "Docker",
+                "StencilJS",
+            ],
+        },
+        {
+            type: "featured",
+            thumbImg: "movies-api.png",
+            title: "Movies API - Demo",
+            description:
+                "This is a REST API built as a demo for potential employers.",
+            siteAddress: "https://moviesapi.net",
+            github: "https://github.com/anthonygcamacho/movies-api",
+            tech: [
+                "NodeJS",
+                "Express",
+                "TypeScript",
+                "AWS",
+                "AWS|RDS|Postgres",
+                "AWS|Fargate",
                 "Docker",
                 "StencilJS",
             ],
@@ -120,11 +164,23 @@ function App() {
             <Projects>
                 <Featured>
                     <ProjectsHeader>Featured</ProjectsHeader>
-                    {/* {featuredProjects} */}
+                    <ProjectGroups>
+                        {featuredProjects.map((project) => (
+                            <Project
+                                thumbImg={project.thumbImg}
+                                title={project.title}
+                                description={project.description}
+                                siteAddress={project.siteAddress}
+                                github={project.title}
+                                tech={project.title}
+                            />
+                        ))}
+                    </ProjectGroups>
                 </Featured>
                 <PastWork>
-                    <ProjectsHeader>Pass Work</ProjectsHeader>
+                    <ProjectsHeader>Past Work</ProjectsHeader>
                     {/* {pastProjects} */}
+                    <ProjectGroups></ProjectGroups>
                 </PastWork>
             </Projects>
         </AppSection>
