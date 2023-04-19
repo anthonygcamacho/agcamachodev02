@@ -4,6 +4,6 @@
 
 @layer components {
     .tech {
-        @apply px-2 py-1 mx-2 my-2 rounded-md;
+        @apply px-2 py-1 rounded-md;
     }
 }

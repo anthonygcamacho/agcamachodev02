@@ -25,7 +25,7 @@ const Projects = tw.div`p-20`
 
 const ProjectsHeader = tw.h2`text-3xl mb-8`
 
-const ProjectGroups = tw.div`flex flex-wrap justify-start items-start gap-8`
+const ProjectGroups = tw.div`flex flex-wrap justify-start items-start gap-8 mb-16`
 
 const Featured = tw.div``
 
@@ -36,58 +36,58 @@ function App() {
         {
             type: "featured",
             thumbImg: "movies-api.png",
-            title: "Movies API - Demo",
+            title: "Movies API - Demo 1",
             description:
                 "This is a REST API built as a demo for potential employers.",
             siteAddress: "https://moviesapi.net",
             github: "https://github.com/anthonygcamacho/movies-api",
-            tech: [
-                "NodeJS",
-                "Express",
-                "TypeScript",
-                "AWS",
-                "AWS|RDS|Postgres",
-                "AWS|Fargate",
-                "Docker",
-                "StencilJS",
+            techs: [
+                "NodeJS:NodeJS",
+                "Express:Express",
+                "TypeScript:TypeScript",
+                "AWS:AWS",
+                "AWS:AWS|RDS|Postgres",
+                "AWS:AWS|Fargate",
+                "Docker:Docker",
+                "StencilJS:StencilJS",
             ],
         },
         {
             type: "featured",
             thumbImg: "movies-api.png",
-            title: "Movies API - Demo",
+            title: "Movies API - Demo 2",
             description:
                 "This is a REST API built as a demo for potential employers.",
             siteAddress: "https://moviesapi.net",
             github: "https://github.com/anthonygcamacho/movies-api",
-            tech: [
-                "NodeJS",
-                "Express",
-                "TypeScript",
-                "AWS",
-                "AWS|RDS|Postgres",
-                "AWS|Fargate",
-                "Docker",
-                "StencilJS",
+            techs: [
+                "NodeJS:NodeJS",
+                "Express:Express",
+                "TypeScript:TypeScript",
+                "AWS:AWS",
+                "AWS:AWS|RDS|Postgres",
+                "AWS:AWS|Fargate",
+                "Docker:Docker",
+                "StencilJS:StencilJS",
             ],
         },
         {
             type: "featured",
             thumbImg: "movies-api.png",
-            title: "Movies API - Demo",
+            title: "Movies API - Demo 3",
             description:
                 "This is a REST API built as a demo for potential employers.",
             siteAddress: "https://moviesapi.net",
             github: "https://github.com/anthonygcamacho/movies-api",
-            tech: [
-                "NodeJS",
-                "Express",
-                "TypeScript",
-                "AWS",
-                "AWS|RDS|Postgres",
-                "AWS|Fargate",
-                "Docker",
-                "StencilJS",
+            techs: [
+                "NodeJS:NodeJS",
+                "Express:Express",
+                "TypeScript:TypeScript",
+                "AWS:AWS",
+                "AWS:AWS|RDS|Postgres",
+                "AWS:AWS|Fargate",
+                "Docker:Docker",
+                "StencilJS:StencilJS",
             ],
         },
     ]
@@ -146,16 +146,16 @@ function App() {
                         Portfolio Built-on:
                     </TechStackGroupHeader>
                     <TechStack>
-                        <Tech className="tech bg-bgreact text-txtreact">
+                        <Tech className="mx-2 my-2 tech bg-bgReact text-txtReact">
                             #React
                         </Tech>
-                        <Tech className="tech bg-bgtypescript text-txttypescript">
+                        <Tech className="mx-2 my-2 tech bg-bgTypeScript text-txtTypeScript">
                             #TypeScript
                         </Tech>
-                        <Tech className="tech bg-bgtailwind text-txttailwind">
+                        <Tech className="mx-2 my-2 tech bg-bgTailwind text-txtTailwind">
                             #Tailwind
                         </Tech>
-                        <Tech className="tech bg-bgfirebase text-txtfirebase">
+                        <Tech className="mx-2 my-2 tech bg-bgFirebase text-txtFirebase">
                             #Firebase
                         </Tech>
                     </TechStack>
@@ -167,12 +167,13 @@ function App() {
                     <ProjectGroups>
                         {featuredProjects.map((project) => (
                             <Project
+                                key={project.title}
                                 thumbImg={project.thumbImg}
                                 title={project.title}
                                 description={project.description}
                                 siteAddress={project.siteAddress}
-                                github={project.title}
-                                tech={project.title}
+                                github={project.github}
+                                techs={project.techs}
                             />
                         ))}
                     </ProjectGroups>
