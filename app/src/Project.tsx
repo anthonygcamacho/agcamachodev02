@@ -57,11 +57,7 @@ const Project: FunctionComponent<{
                     </a>
                     <TechStack>
                         {techs.map((tech) => (
-                            <Tech
-                                className={`tech bg-bg${
-                                    tech.split(":")[0]
-                                } text-txt${tech.split(":")[0]}`}
-                            >
+                            <Tech className={`tech ${tech.split(":")[0]}`}>
                                 #{tech.split(":")[1]}
                             </Tech>
                         ))}

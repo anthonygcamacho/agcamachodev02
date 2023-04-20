@@ -42,14 +42,14 @@ function App() {
             siteAddress: "https://moviesapi.net",
             github: "https://github.com/anthonygcamacho/movies-api",
             techs: [
-                "NodeJS:NodeJS",
-                "Express:Express",
-                "TypeScript:TypeScript",
-                "AWS:AWS",
-                "AWS:AWS|RDS|Postgres",
-                "AWS:AWS|Fargate",
-                "Docker:Docker",
-                "StencilJS:StencilJS",
+                "techNodeJS:NodeJS",
+                "techExpress:Express",
+                "techTypeScript:TypeScript",
+                "techAWS:AWS",
+                "techAWS:AWS|RDS|Postgres",
+                "techAWS:AWS|Fargate",
+                "techDocker:Docker",
+                "techStencilJS:StencilJS",
             ],
         },
         {
@@ -61,14 +61,14 @@ function App() {
             siteAddress: "https://moviesapi.net",
             github: "https://github.com/anthonygcamacho/movies-api",
             techs: [
-                "NodeJS:NodeJS",
-                "Express:Express",
-                "TypeScript:TypeScript",
-                "AWS:AWS",
-                "AWS:AWS|RDS|Postgres",
-                "AWS:AWS|Fargate",
-                "Docker:Docker",
-                "StencilJS:StencilJS",
+                "techNodeJS:NodeJS",
+                "techExpress:Express",
+                "techTypeScript:TypeScript",
+                "techAWS:AWS",
+                "techAWS:AWS|RDS|Postgres",
+                "techAWS:AWS|Fargate",
+                "techDocker:Docker",
+                "techStencilJS:StencilJS",
             ],
         },
         {
@@ -80,14 +80,14 @@ function App() {
             siteAddress: "https://moviesapi.net",
             github: "https://github.com/anthonygcamacho/movies-api",
             techs: [
-                "NodeJS:NodeJS",
-                "Express:Express",
-                "TypeScript:TypeScript",
-                "AWS:AWS",
-                "AWS:AWS|RDS|Postgres",
-                "AWS:AWS|Fargate",
-                "Docker:Docker",
-                "StencilJS:StencilJS",
+                "techNodeJS:NodeJS",
+                "techExpress:Express",
+                "techTypeScript:TypeScript",
+                "techAWS:AWS",
+                "techAWS:AWS|RDS|Postgres",
+                "techAWS:AWS|Fargate",
+                "techDocker:Docker",
+                "techStencilJS:StencilJS",
             ],
         },
     ]
@@ -146,16 +146,14 @@ function App() {
                         Portfolio Built-on:
                     </TechStackGroupHeader>
                     <TechStack>
-                        <Tech className="mx-2 my-2 tech bg-bgReact text-txtReact">
-                            #React
-                        </Tech>
-                        <Tech className="mx-2 my-2 tech bg-bgTypeScript text-txtTypeScript">
+                        <Tech className="mx-2 my-2 tech techReact">#React</Tech>
+                        <Tech className="mx-2 my-2 tech techTypeScript">
                             #TypeScript
                         </Tech>
-                        <Tech className="mx-2 my-2 tech bg-bgTailwind text-txtTailwind">
+                        <Tech className="mx-2 my-2 tech techTailwind">
                             #Tailwind
                         </Tech>
-                        <Tech className="mx-2 my-2 tech bg-bgFirebase text-txtFirebase">
+                        <Tech className="mx-2 my-2 tech techFirebase">
                             #Firebase
                         </Tech>
                     </TechStack>

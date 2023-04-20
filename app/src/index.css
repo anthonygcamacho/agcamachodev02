@@ -6,4 +6,31 @@
     .tech {
         @apply px-2 py-1 rounded-md;
     }
+    .techAWS {
+        @apply bg-[#FF9900] text-[#000000];
+    }
+    .techDocker {
+        @apply bg-[#0db7ed] text-[#ffffff];
+    }
+    .techExpress {
+        @apply bg-[#eeeeee] text-[#000000];
+    }
+    .techFirebase {
+        @apply bg-[#FFCB2C] text-[#000000];
+    }
+    .techNodeJS {
+        @apply bg-[#43853d] text-[#ffffff];
+    }
+    .techReact {
+        @apply bg-[#61dbfb] text-[#000000];
+    }
+    .techTailwind {
+        @apply bg-[#38BDF8] text-[#000000];
+    }
+    .techTypeScript {
+        @apply bg-[#007acc] text-[#ffffff];
+    }
+    .techStencilJS {
+        @apply bg-[#783BFF] text-[#ffffff];
+    }
 }
