@@ -1,11 +1,12 @@
-import { FunctionComponent } from "react"
+import { FunctionComponent, useEffect, useState } from "react"
 import tw from "twin.macro"
+import FirebaseStorageService from "../services/FirebaseStorage"
 
 const ProjectWrapper = tw.div`w-[400px] border-4 border-gray-400 rounded-xl`
 
-const Thumb = tw.div`h-16 justify-center bg-center bg-no-repeat bg-cover rounded-lg`
+const Thumb = tw.div`h-24 justify-center bg-center bg-no-repeat bg-cover rounded-t-lg`
 
-const Content = tw.div`relative p-5`
+const Content = tw.div`relative p-5 rounded-b-lg bg-white`
 
 const TitleLink = tw.a`absolute -top-6 -left-0 bg-gray-300 text-gray-900 pl-5 py-2 pr-5 rounded-r-xl`
 
@@ -13,15 +14,13 @@ const Title = tw.h3`text-lg group-hover:text-blue-600 font-semibold`
 
 const IconNewTab = tw.i`text-sm ml-2 group-hover:text-blue-600 font-semibold`
 
-const Description = tw.div``
+const Description = tw.div`mt-4`
 
 const IconGithub = tw.i``
 
-const TechStack = tw.div`flex flex-wrap justify-start items-start`
+const TechStack = tw.div`mt-4 flex flex-wrap justify-start items-start`
 
 const Tech = tw.span`mr-2 mb-2`
-
-// https://stackoverflow.com/questions/69687530/dynamically-build-classnames-in-tailwindcss
 
 const Project: FunctionComponent<{
     thumbImg: string
@@ -31,11 +30,29 @@ const Project: FunctionComponent<{
     githubRepo: string
     techs: string[]
 }> = ({ thumbImg, title, description, siteAddress, githubRepo, techs }) => {
+    const [thumbImgURL, setthumbImgURL] = useState("")
+
+    console.log(githubRepo)
+
+    useEffect(() => {
+        async function getDownloadURL() {
+            let thumbImgURLResult = await FirebaseStorageService.getDownloadURL(
+                thumbImg
+            )
+            setthumbImgURL(thumbImgURLResult)
+        }
+        if (!thumbImgURL) {
+            getDownloadURL()
+        }
+    })
+
     return (
         <>
             <ProjectWrapper>
                 <Thumb
-                    style={{ backgroundImage: `url(./imgs/${thumbImg})` }}
+                    style={{
+                        backgroundImage: `url(${thumbImgURL})`,
+                    }}
                 ></Thumb>
                 <Content>
                     <TitleLink
@@ -50,11 +67,22 @@ const Project: FunctionComponent<{
                         </Title>
                     </TitleLink>
                     <Description>{description}</Description>
-                    <a href={githubRepo} target="_blank" rel="noreferrer">
-                        <IconGithub className="fa-brands fa-github"></IconGithub>
-                    </a>
+                    {githubRepo ? (
+                        <a
+                            href={githubRepo}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-block mt-4 text-blue-800 hover:text-blue-400"
+                        >
+                            <IconGithub className="fa-brands fa-github"></IconGithub>{" "}
+                            Visit Repo{" "}
+                        </a>
+                    ) : (
+                        ""
+                    )}
+
                     <TechStack>
-                        {techs.map((tech) => (
+                        {techs.sort().map((tech) => (
                             <Tech
                                 key={tech}
                                 className={`tech ${tech.split(":")[0]}`}

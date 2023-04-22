@@ -2,35 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    body {
+        @apply bg-[#f1f1f1;]
+    }
+}
+
 @layer components {
     .tech {
         @apply px-2 py-1 rounded-md;
     }
     .techAWS {
-        @apply bg-[#FF9900] text-[#000000];
+        @apply bg-[#FF9900] text-white;
     }
     .techDocker {
-        @apply bg-[#0db7ed] text-[#ffffff];
+        @apply bg-[#0db7ed] text-white;
     }
     .techExpress {
-        @apply bg-[#eeeeee] text-[#000000];
+        @apply bg-[#eeeeee] text-black;
     }
     .techFirebase {
-        @apply bg-[#FFCB2C] text-[#000000];
+        @apply bg-[#FFCB2C] text-black;
+    }
+    .techJavaScript {
+        @apply bg-[#EFD81D] text-black;
     }
     .techNodeJS {
-        @apply bg-[#43853d] text-[#ffffff];
+        @apply bg-[#43853d] text-white;
+    }
+    .techPassportJWT {
+        @apply text-white bg-black;
+    }
+    .techPassportLocal {
+        @apply text-white bg-black;
+    }
+    .techPHP {
+        @apply bg-[#4D588E] text-white;
     }
     .techReact {
-        @apply bg-[#61dbfb] text-[#000000];
+        @apply bg-[#61dbfb] text-black;
     }
     .techTailwind {
-        @apply bg-[#38BDF8] text-[#000000];
+        @apply bg-[#38BDF8] text-black;
     }
     .techTypeScript {
-        @apply bg-[#007acc] text-[#ffffff];
+        @apply bg-[#007acc] text-white;
+    }
+    .techSCSS {
+        @apply bg-[#C76494] text-white;
     }
     .techStencilJS {
-        @apply bg-[#783BFF] text-[#ffffff];
+        @apply bg-[#783BFF] text-white;
+    }
+    .techSwaggerDocs {
+        @apply bg-[#85EA2D] text-black;
+    }
+    .techUnderscores {
+        @apply bg-[#8CC7C2] text-black;
+    }
+    .techWordPress {
+        @apply bg-[#207196] text-white;
     }
 }

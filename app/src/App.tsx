@@ -1,16 +1,9 @@
 import { useState, useEffect } from "react"
 import tw from "twin.macro"
-
-// import {
-//     firebaseAuth,
-//     firebaseFirestore,
-//     firebaseStorage,
-// } from "./FirebaseConfig"
-
 import Icon from "./components/Icon"
 import Project from "./components/Project"
-
 import FirebaseFirestoreService from "./services/FirebaseFirestore"
+import ProjectsInterface from "./types/ProjectsInterface"
 
 const AppSection = tw.div`flex`
 
@@ -40,17 +33,6 @@ const Featured = tw.div``
 
 const PastWork = tw.div``
 
-interface ProjectsInterface {
-    thumbImg: string
-    title: string
-    type: string
-    description: string
-    siteAddress: string
-    githubRepo: string
-    techs: string[]
-    status: string
-}
-
 function App() {
     const [featuredProjects, setFeaturedProjects] = useState<
         ProjectsInterface[]
@@ -59,7 +41,7 @@ function App() {
 
     useEffect(() => {
         FirebaseFirestoreService.readDocuments({ collection: "projects" })
-            .then((results) => {
+            .then(async (results) => {
                 let featuredProjects: ProjectsInterface[] = []
                 let pastProjects: ProjectsInterface[] = []
                 results.forEach((doc) => {
