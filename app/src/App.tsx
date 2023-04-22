@@ -1,7 +1,16 @@
+import { useState, useEffect } from "react"
 import tw from "twin.macro"
-import Icon from "./Icon"
-import Project from "./Project"
-// import { useState } from "react"
+
+// import {
+//     firebaseAuth,
+//     firebaseFirestore,
+//     firebaseStorage,
+// } from "./FirebaseConfig"
+
+import Icon from "./components/Icon"
+import Project from "./components/Project"
+
+import FirebaseFirestoreService from "./services/FirebaseFirestore"
 
 const AppSection = tw.div`flex`
 
@@ -31,76 +40,43 @@ const Featured = tw.div``
 
 const PastWork = tw.div``
 
+interface ProjectsInterface {
+    thumbImg: string
+    title: string
+    type: string
+    description: string
+    siteAddress: string
+    githubRepo: string
+    techs: string[]
+    status: string
+}
+
 function App() {
-    const projects = [
-        {
-            type: "featured",
-            thumbImg: "movies-api.png",
-            title: "Movies API - Demo 1",
-            description:
-                "This is a REST API built as a demo for potential employers.",
-            siteAddress: "https://moviesapi.net",
-            github: "https://github.com/anthonygcamacho/movies-api",
-            techs: [
-                "techNodeJS:NodeJS",
-                "techExpress:Express",
-                "techTypeScript:TypeScript",
-                "techAWS:AWS",
-                "techAWS:AWS|RDS|Postgres",
-                "techAWS:AWS|Fargate",
-                "techDocker:Docker",
-                "techStencilJS:StencilJS",
-            ],
-        },
-        {
-            type: "featured",
-            thumbImg: "movies-api.png",
-            title: "Movies API - Demo 2",
-            description:
-                "This is a REST API built as a demo for potential employers.",
-            siteAddress: "https://moviesapi.net",
-            github: "https://github.com/anthonygcamacho/movies-api",
-            techs: [
-                "techNodeJS:NodeJS",
-                "techExpress:Express",
-                "techTypeScript:TypeScript",
-                "techAWS:AWS",
-                "techAWS:AWS|RDS|Postgres",
-                "techAWS:AWS|Fargate",
-                "techDocker:Docker",
-                "techStencilJS:StencilJS",
-            ],
-        },
-        {
-            type: "featured",
-            thumbImg: "movies-api.png",
-            title: "Movies API - Demo 3",
-            description:
-                "This is a REST API built as a demo for potential employers.",
-            siteAddress: "https://moviesapi.net",
-            github: "https://github.com/anthonygcamacho/movies-api",
-            techs: [
-                "techNodeJS:NodeJS",
-                "techExpress:Express",
-                "techTypeScript:TypeScript",
-                "techAWS:AWS",
-                "techAWS:AWS|RDS|Postgres",
-                "techAWS:AWS|Fargate",
-                "techDocker:Docker",
-                "techStencilJS:StencilJS",
-            ],
-        },
-    ]
+    const [featuredProjects, setFeaturedProjects] = useState<
+        ProjectsInterface[]
+    >([])
+    const [pastProjects, setPastProjects] = useState<ProjectsInterface[]>([])
 
-    const featuredProjects = projects.filter(
-        (project) => project.type === "featured"
-    )
-
-    console.log(featuredProjects)
-
-    const pastProjects = projects.filter((project) => project.type === "past")
-
-    console.log(pastProjects)
+    useEffect(() => {
+        FirebaseFirestoreService.readDocuments({ collection: "projects" })
+            .then((results) => {
+                let featuredProjects: ProjectsInterface[] = []
+                let pastProjects: ProjectsInterface[] = []
+                results.forEach((doc) => {
+                    let project = doc.data() as ProjectsInterface
+                    if (project.status === "published") {
+                        project.type === "featured"
+                            ? featuredProjects.push(project)
+                            : pastProjects.push(project)
+                    }
+                })
+                setFeaturedProjects(featuredProjects)
+                setPastProjects(pastProjects)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }, [])
 
     return (
         <AppSection>
@@ -160,27 +136,46 @@ function App() {
                 </TechStackGroup>
             </Sidebar>
             <Projects>
-                <Featured>
-                    <ProjectsHeader>Featured</ProjectsHeader>
-                    <ProjectGroups>
-                        {featuredProjects.map((project) => (
-                            <Project
-                                key={project.title}
-                                thumbImg={project.thumbImg}
-                                title={project.title}
-                                description={project.description}
-                                siteAddress={project.siteAddress}
-                                github={project.github}
-                                techs={project.techs}
-                            />
-                        ))}
-                    </ProjectGroups>
-                </Featured>
-                <PastWork>
-                    <ProjectsHeader>Past Work</ProjectsHeader>
-                    {/* {pastProjects} */}
-                    <ProjectGroups></ProjectGroups>
-                </PastWork>
+                {featuredProjects.length > 0 ? (
+                    <Featured>
+                        <ProjectsHeader>Featured</ProjectsHeader>
+                        <ProjectGroups>
+                            {featuredProjects.map((project) => (
+                                <Project
+                                    key={project.title}
+                                    thumbImg={project.thumbImg}
+                                    title={project.title}
+                                    description={project.description}
+                                    siteAddress={project.siteAddress}
+                                    githubRepo={project.githubRepo}
+                                    techs={project.techs}
+                                />
+                            ))}
+                        </ProjectGroups>
+                    </Featured>
+                ) : (
+                    ""
+                )}
+                {pastProjects.length > 0 ? (
+                    <PastWork>
+                        <ProjectsHeader>Past Work</ProjectsHeader>
+                        <ProjectGroups>
+                            {pastProjects.map((project) => (
+                                <Project
+                                    key={project.title}
+                                    thumbImg={project.thumbImg}
+                                    title={project.title}
+                                    description={project.description}
+                                    siteAddress={project.siteAddress}
+                                    githubRepo={project.githubRepo}
+                                    techs={project.techs}
+                                />
+                            ))}
+                        </ProjectGroups>
+                    </PastWork>
+                ) : (
+                    ""
+                )}
             </Projects>
         </AppSection>
     )

@@ -28,11 +28,9 @@ const Project: FunctionComponent<{
     title: string
     description: string
     siteAddress: string
-    github: string
+    githubRepo: string
     techs: string[]
-}> = ({ thumbImg, title, description, siteAddress, github, techs }) => {
-    console.log(techs)
-
+}> = ({ thumbImg, title, description, siteAddress, githubRepo, techs }) => {
     return (
         <>
             <ProjectWrapper>
@@ -52,12 +50,15 @@ const Project: FunctionComponent<{
                         </Title>
                     </TitleLink>
                     <Description>{description}</Description>
-                    <a href={github} target="_blank" rel="noreferrer">
+                    <a href={githubRepo} target="_blank" rel="noreferrer">
                         <IconGithub className="fa-brands fa-github"></IconGithub>
                     </a>
                     <TechStack>
                         {techs.map((tech) => (
-                            <Tech className={`tech ${tech.split(":")[0]}`}>
+                            <Tech
+                                key={tech}
+                                className={`tech ${tech.split(":")[0]}`}
+                            >
                                 #{tech.split(":")[1]}
                             </Tech>
                         ))}
