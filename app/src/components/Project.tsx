@@ -78,7 +78,10 @@ const Project: FunctionComponent<{
                             Visit Repo{" "}
                         </a>
                     ) : (
-                        ""
+                        <div className="mt-4">
+                            <IconGithub className="fa-brands fa-github"></IconGithub>{" "}
+                            Repo not available
+                        </div>
                     )}
 
                     <TechStack>
