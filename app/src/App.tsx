@@ -47,7 +47,7 @@ function App() {
                 results.forEach((doc) => {
                     let project = doc.data() as ProjectsInterface
                     if (project.status === "published") {
-                        project.type === "featured"
+                        project.type === "recent"
                             ? featuredProjects.push(project)
                             : pastProjects.push(project)
                     }
@@ -120,7 +120,7 @@ function App() {
             <Projects>
                 {featuredProjects.length > 0 ? (
                     <Featured>
-                        <ProjectsHeader>Featured</ProjectsHeader>
+                        <ProjectsHeader>Recent Work</ProjectsHeader>
                         <ProjectGroups>
                             {featuredProjects.map((project) => (
                                 <Project
