@@ -7,7 +7,7 @@ import ProjectsInterface from "./types/ProjectsInterface"
 
 const AppSection = tw.div`flex`
 
-const Sidebar = tw.div`flex flex-col items-center bg-gray-800 text-center p-20 w-[430px] h-full`
+const Sidebar = tw.div`flex flex-col items-center bg-gray-800 text-center p-20 w-[430px]`
 
 const ImgWrapper = tw.div`w-[270px] mb-[40px]`
 
