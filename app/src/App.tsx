@@ -9,6 +9,8 @@ const AppSection = tw.div`flex`
 
 const Sidebar = tw.div`flex flex-col items-center bg-gray-800 text-center p-20 w-[430px]`
 
+const Loader = tw.div`p-20 text-3xl`
+
 const ImgWrapper = tw.div`w-[270px] mb-[40px]`
 
 const IconGroup = tw.div`mb-[14px]`
@@ -38,6 +40,7 @@ function App() {
         ProjectsInterface[]
     >([])
     const [pastProjects, setPastProjects] = useState<ProjectsInterface[]>([])
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         FirebaseFirestoreService.readDocuments({ collection: "projects" })
@@ -46,14 +49,13 @@ function App() {
                 let pastProjects: ProjectsInterface[] = []
                 results.forEach((doc) => {
                     let project = doc.data() as ProjectsInterface
-                    if (project.status === "published") {
-                        project.type === "recent"
-                            ? featuredProjects.push(project)
-                            : pastProjects.push(project)
-                    }
+                    project.type === "featured"
+                        ? featuredProjects.push(project)
+                        : pastProjects.push(project)
                 })
                 setFeaturedProjects(featuredProjects)
                 setPastProjects(pastProjects)
+                setIsLoading(false)
             })
             .catch((err) => {
                 console.log(err)
@@ -104,6 +106,9 @@ function App() {
                         Portfolio Built-on:
                     </TechStackGroupHeader>
                     <TechStack>
+                        <Tech className="mx-2 my-2 tech techFirebase">
+                            #Firebase
+                        </Tech>
                         <Tech className="mx-2 my-2 tech techReact">#React</Tech>
                         <Tech className="mx-2 my-2 tech techTypeScript">
                             #TypeScript
@@ -111,54 +116,68 @@ function App() {
                         <Tech className="mx-2 my-2 tech techTailwind">
                             #Tailwind
                         </Tech>
-                        <Tech className="mx-2 my-2 tech techFirebase">
-                            #Firebase
-                        </Tech>
                     </TechStack>
                 </TechStackGroup>
+                <a
+                    href="https://github.com/anthonygcamacho/agcamachodev02"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-block mt-1 text-blue-400 hover:text-blue-300"
+                >
+                    <i className="fa-brands fa-github"></i> Visit Portfolio Repo
+                </a>
             </Sidebar>
-            <Projects>
-                {featuredProjects.length > 0 ? (
-                    <Featured>
-                        <ProjectsHeader>Recent Work</ProjectsHeader>
-                        <ProjectGroups>
-                            {featuredProjects.map((project) => (
-                                <Project
-                                    key={project.title}
-                                    thumbImg={project.thumbImg}
-                                    title={project.title}
-                                    description={project.description}
-                                    siteAddress={project.siteAddress}
-                                    githubRepo={project.githubRepo}
-                                    techs={project.techs}
-                                />
-                            ))}
-                        </ProjectGroups>
-                    </Featured>
-                ) : (
-                    ""
-                )}
-                {pastProjects.length > 0 ? (
-                    <PastWork>
-                        <ProjectsHeader>Past Work</ProjectsHeader>
-                        <ProjectGroups>
-                            {pastProjects.map((project) => (
-                                <Project
-                                    key={project.title}
-                                    thumbImg={project.thumbImg}
-                                    title={project.title}
-                                    description={project.description}
-                                    siteAddress={project.siteAddress}
-                                    githubRepo={project.githubRepo}
-                                    techs={project.techs}
-                                />
-                            ))}
-                        </ProjectGroups>
-                    </PastWork>
-                ) : (
-                    ""
-                )}
-            </Projects>
+            {isLoading ? (
+                <Loader>
+                    {"Rounding up the troops. Please be patient. "}
+                    <i className="fa-solid fa-spinner fa-spin"></i>
+                </Loader>
+            ) : (
+                <Projects>
+                    {featuredProjects.length > 0 ? (
+                        <Featured>
+                            <ProjectsHeader>Featured</ProjectsHeader>
+                            <ProjectGroups>
+                                {featuredProjects.map((project) => (
+                                    <Project
+                                        key={project.title}
+                                        date={project.date}
+                                        thumbImg={project.thumbImg}
+                                        title={project.title}
+                                        description={project.description}
+                                        siteAddress={project.siteAddress}
+                                        githubRepo={project.githubRepo}
+                                        techs={project.techs}
+                                    />
+                                ))}
+                            </ProjectGroups>
+                        </Featured>
+                    ) : (
+                        ""
+                    )}
+                    {pastProjects.length > 0 ? (
+                        <PastWork>
+                            <ProjectsHeader>Past Work</ProjectsHeader>
+                            <ProjectGroups>
+                                {pastProjects.map((project) => (
+                                    <Project
+                                        key={project.title}
+                                        date={project.date}
+                                        thumbImg={project.thumbImg}
+                                        title={project.title}
+                                        description={project.description}
+                                        siteAddress={project.siteAddress}
+                                        githubRepo={project.githubRepo}
+                                        techs={project.techs}
+                                    />
+                                ))}
+                            </ProjectGroups>
+                        </PastWork>
+                    ) : (
+                        ""
+                    )}
+                </Projects>
+            )}
         </AppSection>
     )
 }

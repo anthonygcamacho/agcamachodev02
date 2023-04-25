@@ -1,38 +1,40 @@
 import { FunctionComponent, useEffect, useState } from "react"
 import tw from "twin.macro"
 import FirebaseStorageService from "../services/FirebaseStorage"
+import ProjectsInterface from "../types/ProjectsInterface"
 
-const ProjectWrapper = tw.div`w-[400px] border-4 border-gray-400 rounded-xl`
+const ProjectWrapper = tw.div`w-[430px] border-4 border-gray-400 rounded-xl`
 
 const Thumb = tw.div`h-24 justify-center bg-center bg-no-repeat bg-cover rounded-t-lg`
 
-const Content = tw.div`relative p-5 rounded-b-lg bg-white`
+const Content = tw.div`relative px-5 pt-7 pb-10 rounded-b-lg bg-white`
+
+const DateEl = tw.div`absolute bottom-0 right-0 p-1 px-3  rounded-br-md bg-gray-400 text-white`
 
 const TitleLink = tw.a`absolute -top-6 -left-0 bg-gray-300 text-gray-900 pl-5 py-2 pr-5 rounded-r-xl`
 
-const Title = tw.h3`text-lg group-hover:text-blue-600 font-semibold`
+const Title = tw.h3`text-xl group-hover:text-blue-600 font-semibold`
 
-const IconNewTab = tw.i`text-sm ml-2 group-hover:text-blue-600 font-semibold`
+const IconNewTab = tw.i`text-base ml-2 group-hover:text-blue-600 font-semibold`
 
-const Description = tw.div`mt-4`
+const Description = tw.div`mt-4 text-lg`
 
 const IconGithub = tw.i``
 
-const TechStack = tw.div`mt-4 flex flex-wrap justify-start items-start`
+const TechStack = tw.div`mt-5 flex flex-wrap justify-start items-start`
 
 const Tech = tw.span`mr-2 mb-2`
 
-const Project: FunctionComponent<{
-    thumbImg: string
-    title: string
-    description: string
-    siteAddress: string
-    githubRepo: string
-    techs: string[]
-}> = ({ thumbImg, title, description, siteAddress, githubRepo, techs }) => {
+const Project: FunctionComponent<ProjectsInterface> = ({
+    thumbImg,
+    date,
+    title,
+    description,
+    siteAddress,
+    githubRepo,
+    techs,
+}) => {
     const [thumbImgURL, setthumbImgURL] = useState("")
-
-    console.log(githubRepo)
 
     useEffect(() => {
         async function getDownloadURL() {
@@ -55,6 +57,9 @@ const Project: FunctionComponent<{
                     }}
                 ></Thumb>
                 <Content>
+                    <DateEl>
+                        {new Date(date.seconds * 1000).getFullYear()}
+                    </DateEl>
                     <TitleLink
                         href={siteAddress}
                         target="_blank"
@@ -75,7 +80,7 @@ const Project: FunctionComponent<{
                             className="inline-block mt-4 text-blue-800 hover:text-blue-400"
                         >
                             <IconGithub className="fa-brands fa-github"></IconGithub>{" "}
-                            Visit Repo{" "}
+                            Visit App Repo
                         </a>
                     ) : (
                         <div className="mt-4">

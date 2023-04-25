@@ -1,10 +1,14 @@
 export default interface ProjectsInterface {
     thumbImg: string
+    date: {
+        seconds: number
+        nanoseconds: number
+    }
     title: string
-    type: string
     description: string
     siteAddress: string
     githubRepo: string
     techs: string[]
-    status: string
+    type?: string
+    status?: string
 }
